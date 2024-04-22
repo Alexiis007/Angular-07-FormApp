@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col">
 
-        <form [formGroup]="myForm" (nnSubmit)="onSubmit()" autocomplete="off">
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()" autocomplete="off">
 
             <!-- Nombre -->
             <div class="row mb-3">
@@ -15,7 +15,7 @@
                            formControlName="name"
                            placeholder="Nombre del usuario">
 
-                    <span class="form-text text-danger">
+                    <span *ngIf="isValidFiel('name')" class="form-text text-danger">
                         Debe de ser en formato de nombre y apellido
                     </span>
                 </div>
@@ -29,7 +29,7 @@
                            class="form-control"
                            placeholder="Email del usuario"
                            formControlName="email">
-                    <span class="form-text text-danger">
+                    <span *ngIf="isValidFiel('email')" class="form-text text-danger">
                         mensaje de error del email
                     </span>
                 </div>
@@ -43,7 +43,7 @@
                     formControlName="username"
                            class="form-control"
                            placeholder="Nombre código del usuario">
-                    <span class="form-text text-danger">
+                    <span *ngIf="isValidFiel('username')" class="form-text text-danger">
                          El username no puede ser Strider
                     </span>
                 </div>
@@ -58,7 +58,7 @@
                            placeholder="Password de su cuenta"
                            formControlName="password">
 
-                    <span class="form-text text-danger">
+                    <span *ngIf="isValidFiel('password')" class="form-text text-danger">
                          La contraseña debe de ser mayor de 6 caracteres.
                     </span>
                 </div>
@@ -73,7 +73,7 @@
                            placeholder="Confirmar la contraseña"
                            formControlName="password2">
 
-                    <span class="form-text text-danger">
+                    <span *ngIf="isValidFiel('password2')" class="form-text text-danger">
                          Las contraseñas deben de ser iguales
                     </span>
                 </div>
@@ -117,4 +117,4 @@
 <pre>{{ myForm.value.password | json }}</pre>
 
 <h5>Confirmar</h5>
-<pre>{{ myForm.value.password2 | json }}</pre>
+<pre>{{ myForm.controls['password2'].errors| json }}</pre>
