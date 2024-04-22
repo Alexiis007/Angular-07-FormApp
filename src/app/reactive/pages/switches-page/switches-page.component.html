@@ -2,7 +2,7 @@
 <hr>
 
 
-<form autocomplete="off">
+<form [formGroup]="myForm" autocomplete="off">
 
     <!-- Radio -->
     <div class="row mb-3">
@@ -13,7 +13,8 @@
                 <input class="form-check-input"
                        type="radio"
                        value="M"
-                       id="radioMasculino">
+                       id="radioMasculino"
+                       formControlName="gender">
                 <label class="form-check-label" for="radioMasculino">
                   Masculino
                 </label>
@@ -23,7 +24,8 @@
                 <input class="form-check-input"
                        type="radio"
                        value="F"
-                       id="radioFemenino">
+                       id="radioFemenino"
+                       formControlName="gender">
                 <label class="form-check-label" for="radioFemenino">
                   Femenino
                 </label>
@@ -40,7 +42,8 @@
             <div class="form-check form-switch mt-2">
                 <input class="form-check-input"
                        type="checkbox"
-                       id="flexSwitchCheckChecked">
+                       id="flexSwitchCheckChecked"
+                       formControlName="wantNotifications">
                 <label class="form-check-label" for="flexSwitchCheckChecked">Quiero recibir notificaciones</label>
             </div>
 
@@ -54,12 +57,13 @@
             <div class="form-check">
                 <input class="form-check-input"
                        type="checkbox"
-                       id="flexCheckDefault">
+                       id="flexCheckDefault"
+                       formControlName="termsAndCOnditions">
                 <label class="form-check-label" for="flexCheckDefault">
                   Términos y condiciones de uso
                 </label>
               </div>
-              <span class="form-text text-danger">
+              <span *ngIf="this.myForm.controls['termsAndCOnditions'].invalid && this.myForm.controls['termsAndCOnditions'].touched" class="form-text text-danger">
                  Debe de aceptar las condiciones de uso
               </span>
 
@@ -71,7 +75,8 @@
     <div class="row">
         <div class="col">
             <button class="btn btn-primary float-end"
-                    type="submit">
+                    type="submit"
+                    (click)="onSave()">
                 Guardar
             </button>
         </div>
@@ -81,11 +86,11 @@
 
 
 <h5>Valor del formulario</h5>
-<pre>{{ 'object' | json }}</pre>
+<pre>{{ myForm.value| json }}</pre>
 <br>
 
 <h5>Persona</h5>
-<pre>{{ 'object' | json }}</pre>
+<pre>{{ this.person | json }}</pre>
 <br>
 
 <h5>Valid</h5>

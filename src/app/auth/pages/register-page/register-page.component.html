@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col">
 
-        <form autocomplete="off">
+        <form [formGroup]="myForm" (nnSubmit)="onSubmit()" autocomplete="off">
 
             <!-- Nombre -->
             <div class="row mb-3">
@@ -12,6 +12,7 @@
                 <div class="col-sm-9">
                     <input type="text"
                            class="form-control"
+                           formControlName="name"
                            placeholder="Nombre del usuario">
 
                     <span class="form-text text-danger">
@@ -26,7 +27,8 @@
                 <div class="col-sm-9">
                     <input type="email"
                            class="form-control"
-                           placeholder="Email del usuario">
+                           placeholder="Email del usuario"
+                           formControlName="email">
                     <span class="form-text text-danger">
                         mensaje de error del email
                     </span>
@@ -38,6 +40,7 @@
                 <label class="col-sm-3 col-form-label">Username</label>
                 <div class="col-sm-9">
                     <input type="text"
+                    formControlName="username"
                            class="form-control"
                            placeholder="Nombre código del usuario">
                     <span class="form-text text-danger">
@@ -52,7 +55,8 @@
                 <div class="col-sm-9">
                     <input type="password"
                            class="form-control"
-                           placeholder="Password de su cuenta">
+                           placeholder="Password de su cuenta"
+                           formControlName="password">
 
                     <span class="form-text text-danger">
                          La contraseña debe de ser mayor de 6 caracteres.
@@ -66,7 +70,8 @@
                 <div class="col-sm-9">
                     <input type="password"
                            class="form-control"
-                           placeholder="Confirmar la contraseña">
+                           placeholder="Confirmar la contraseña"
+                           formControlName="password2">
 
                     <span class="form-text text-danger">
                          Las contraseñas deben de ser iguales
@@ -90,24 +95,26 @@
 </div>
 
 
-<h2>Form Valid: </h2>
-<h2>Form Status: </h2>
-<h2>Form Pending: </h2>
+<h2>Form Valid: {{myForm.valid}}</h2>
+<h2>Form Status: {{myForm.status}}</h2>
+<h2>Form Pending: {{myForm.pending}}</h2>
 <h2>Form errors</h2>
-<pre>{{ 'formulario' | json }}</pre>
+<pre>{{ myForm.errors| json }}</pre>
 
 <h5>Nombre</h5>
-<pre>{{ 'formulario' | json }}</pre>
+<pre>{{ myForm.controls['name'].errors| json }}</pre>
 
 <h5>Email</h5>
-<pre>{{ 'formulario' | json }}</pre>
+<pre>{{ myForm.controls['email'].errors| json }}</pre>
 
 <h5>Username</h5>
-<pre>{{ 'formulario' | json }}</pre>
+<pre>{{ myForm.controls['username'].value| json }}</pre>
 
+<h5>Username - Errors</h5>
+<pre>{{ myForm.controls['username'].errors| json }}</pre>
 
 <h5>Password</h5>
-<pre>{{ 'formulario' | json }}</pre>
+<pre>{{ myForm.value.password | json }}</pre>
 
 <h5>Confirmar</h5>
-<pre>{{ 'formulario' | json }}</pre>
+<pre>{{ myForm.value.password2 | json }}</pre>
